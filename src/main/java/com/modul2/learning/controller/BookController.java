@@ -22,6 +22,6 @@ public class BookController {
     public ResponseEntity<?> create(@PathVariable Long userId, @RequestBody BookDTO bookDto) {
         Book bookToCreate = BookMapper.bookDto2Book(bookDto);
         Book createdBook = bookService.create(bookToCreate, userId);
-        return ResponseEntity.ok(BookMapper.bookDto2Book(createdBook));
+        return ResponseEntity.ok(BookMapper.book2BookDto(createdBook));
     }
 }

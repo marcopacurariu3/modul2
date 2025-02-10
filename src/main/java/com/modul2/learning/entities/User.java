@@ -8,7 +8,7 @@ import java.util.List;
 //este util sa punem si proprietatea name, la @Entity, atunci cand vrem sa construim query-uri si in acele query-uri sa facem
 //"referinta" catre acea tabela/entitate
 @Entity(name = "user")
-@Table(name="user", schema = "public")
+@Table(name = "user", schema = "public")
 public class User {
     @Id
     @Column(name = "ID")
@@ -82,5 +82,10 @@ public class User {
 
     public void setBooks(List<Book> books) {
         this.books = books;
+    }
+
+    public void addBook(Book book) {
+        this.books.add(book);
+        book.setUser(this);
     }
 }
