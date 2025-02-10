@@ -1,5 +1,6 @@
 package com.modul2.learning.entities;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
@@ -35,6 +36,12 @@ public class User {
             //cum se numeste entitatea (campul) User, in clasa copil (Book)
             mappedBy = "user")
     private List<Book> books = new ArrayList<>();
+
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
+    @JoinTable(name = "USER_APPLICATION", schema = "public",
+            joinColumns = @JoinColumn(name = "user_id", nullable = false),
+            inverseJoinColumns = @JoinColumn(name = "application_id", nullable = false))
+    private List<Application> applications = new ArrayList<>();
 
     public Long getId() {
         return id;
@@ -87,5 +94,18 @@ public class User {
     public void addBook(Book book) {
         this.books.add(book);
         book.setUser(this);
+    }
+
+    public List<Application> getApplications() {
+        return applications;
+    }
+
+    public void setApplications(List<Application> applications) {
+        this.applications = applications;
+    }
+
+    public void addApplication(Application application) {
+        this.applications.add(application);
+        application.addUser(this);
     }
 }

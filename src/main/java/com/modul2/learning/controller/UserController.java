@@ -1,6 +1,8 @@
 package com.modul2.learning.controller;
 
+import com.modul2.learning.dto.UserDTO;
 import com.modul2.learning.entities.User;
+import com.modul2.learning.mapper.UserMapper;
 import com.modul2.learning.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -28,6 +30,13 @@ public class UserController {
         User createdUser = userService.create(user);
         //pas 3: convertesc entitatea din nou intr-un DTO
         return ResponseEntity.ok(createdUser);
+    }
+
+    @PostMapping("/with-apps")
+    public ResponseEntity<?> createWithApplications(@RequestBody UserDTO userDTO) {
+        User userToCreate = UserMapper.userDTO2User(userDTO);
+        User createdUser = userService.create(userToCreate);
+        return ResponseEntity.ok(UserMapper.user2UserDTO(createdUser));
     }
 
     //returnam un user dupa id
