@@ -11,21 +11,21 @@ import java.util.List;
 @Table(name="user", schema = "public")
 public class User {
     @Id
-    @Column(name="ID")
+    @Column(name = "ID")
     //TODO: de cautat un exemplu cu diferentele de @GeneratedValue
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name="USER_NAME")
+    @Column(name = "USER_NAME")
     private String userName;
 
-    @Column(name="FIRST_NAME")
+    @Column(name = "FIRST_NAME")
     private String firstName;
 
-    @Column(name="LAST_NAME")
+    @Column(name = "LAST_NAME")
     private String lastName;
 
-    @Column(name="AGE")
+    @Column(name = "AGE")
     private Integer age;
 
     @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE},
@@ -74,5 +74,13 @@ public class User {
 
     public void setAge(Integer age) {
         this.age = age;
+    }
+
+    public List<Book> getBooks() {
+        return books;
+    }
+
+    public void setBooks(List<Book> books) {
+        this.books = books;
     }
 }

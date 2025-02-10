@@ -42,4 +42,12 @@ public class Book {
     public void setAuthor(String author) {
         this.author = author;
     }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 }
