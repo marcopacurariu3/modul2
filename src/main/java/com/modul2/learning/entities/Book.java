@@ -16,7 +16,7 @@ public class Book {
     private String author;
 
     @ManyToOne()
-    @JoinColumn(name = "book_id")
+    @JoinColumn(name = "user_id")
     private User user;
 
     public Long getId() {
