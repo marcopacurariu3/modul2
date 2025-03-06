@@ -1,11 +1,14 @@
 package com.modul2.learning.controller;
 
 import com.modul2.learning.dto.UserDTO;
+import com.modul2.learning.dto.validation.AdvancedInfo;
+import com.modul2.learning.dto.validation.ValidationOrder;
 import com.modul2.learning.entities.User;
 import com.modul2.learning.mapper.UserMapper;
 import com.modul2.learning.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -33,7 +36,7 @@ public class UserController {
     }
 
     @PostMapping("/with-apps")
-    public ResponseEntity<?> createWithApplications(@RequestBody UserDTO userDTO) {
+    public ResponseEntity<?> createWithApplications(@Validated(ValidationOrder.class) @RequestBody UserDTO userDTO) {
         User userToCreate = UserMapper.userDTO2User(userDTO);
         User createdUser = userService.create(userToCreate);
         return ResponseEntity.ok(UserMapper.user2UserDTO(createdUser));
